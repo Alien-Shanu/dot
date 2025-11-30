@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deck of Thoughts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+              mono: ['Fira Code', 'monospace'],
+              western: ['Rye', 'serif'],
+            },
+            colors: {
+              'card-red': '#e11d48',
+              'card-black': '#1e293b',
+              'felt-green': '#35654d',
+            },
+            boxShadow: {
+              'card': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+              'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)',
+              'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+            }
+          },
+        },
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Fira+Code&family=Rye&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #0f172a; /* Fallback for dark theme */
+        overflow-x: hidden;
+      }
+      /* Hide scrollbar for clean card modal wrapper, but allow inner content to scroll with style */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .card-texture {
+        background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      /* GLOBAL THIN RED SCROLLBAR STYLES */
+      ::-webkit-scrollbar {
+        width: 4px; /* Very thin */
+        height: 4px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #e11d48; /* card-red */
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #be123c;
+      }
+
+      /* Firefox support */
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #e11d48 transparent;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@dnd-kit/core": "https://esm.sh/@dnd-kit/core@6.1.0?external=react,react-dom",
+    "@dnd-kit/sortable": "https://esm.sh/@dnd-kit/sortable@8.0.0?external=react,react-dom",
+    "@dnd-kit/utilities": "https://esm.sh/@dnd-kit/utilities@3.2.2?external=react,react-dom"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
