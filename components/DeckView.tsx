@@ -12,6 +12,7 @@ interface DeckViewProps {
   onDeleteCard: (id: string) => void;
   onEditCard: (item: TextItem) => void;
   onReorder: (oldIndex: number, newIndex: number) => void;
+  onShuffle?: () => void;
 }
 
 // Wrapper for Sortable Logic
@@ -119,7 +120,7 @@ const SortableCard = ({
 };
 
 
-const DeckView: React.FC<DeckViewProps> = ({ items, viewMode, onCardClick, onDeleteCard, onEditCard, onReorder }) => {
+const DeckView: React.FC<DeckViewProps> = ({ items, viewMode, onCardClick, onDeleteCard, onEditCard, onReorder, onShuffle }) => {
   
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -186,10 +187,20 @@ const DeckView: React.FC<DeckViewProps> = ({ items, viewMode, onCardClick, onDel
   const containerHeight = isFan ? 'h-[600px]' : 'h-[500px]';
 
   return (
-    <div className={`
-        w-full ${containerHeight} relative flex items-center justify-center overflow-visible perspective-1000 origin-center
-        scale-[0.7] sm:scale-90 md:scale-100 transition-transform duration-300
-    `}>
+    <div 
+        className={`
+            w-full ${containerHeight} relative flex items-center justify-center overflow-visible perspective-1000 origin-center
+            scale-[0.7] sm:scale-90 md:scale-100 transition-transform duration-300
+        `}
+        onWheel={(e) => {
+            if (viewMode === 'stack' && onShuffle) {
+                // Simple debounce/throttle could be added if needed, but basic implementation first
+                // Preventing default scroll behavior if we want to capture it fully
+                // e.preventDefault(); // React synthetic event might not support this directly for wheel in some cases or passive listener issues
+                onShuffle();
+            }
+        }}
+    >
       <DndContext 
             sensors={sensors} 
             collisionDetection={closestCenter} 

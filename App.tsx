@@ -5,6 +5,7 @@ import { generateId, shuffleArray } from './utils';
 import DeckView from './components/DeckView';
 import DeckBox from './components/DeckBox';
 import CardModal from './components/CardModal';
+import ConfirmationModal from './components/ConfirmationModal';
 import AuthCard from './components/AuthCard';
 import { Plus, LayoutGrid, Layers, Fan, Shuffle, Download, Sun, Moon, LogOut, User } from 'lucide-react';
 import { arrayMove } from '@dnd-kit/sortable';
@@ -23,6 +24,10 @@ const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditingInModal, setIsEditingInModal] = useState(false);
   const [activeDeckIndex, setActiveDeckIndex] = useState(0);
+  
+  // Confirmation Modal State
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
   
   // Theme State
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -178,16 +183,23 @@ const App: React.FC = () => {
     }
   };
 
-  const handleDeleteItem = async (id: string) => {
-    if (window.confirm("Are you sure you want to discard this card?")) {
-        try {
-            await api.deleteCard(id);
-            setItems(prev => prev.filter(i => i.id !== id));
-        } catch (err) {
-            console.error("Failed to delete card", err);
-            alert("Failed to delete card");
-        }
+  const handleDeleteItem = (id: string) => {
+    setItemToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!itemToDelete) return;
+
+    try {
+        await api.deleteCard(itemToDelete);
+        setItems(prev => prev.filter(i => i.id !== itemToDelete));
+    } catch (err) {
+        console.error("Failed to delete card", err);
+        alert("Failed to delete card");
     }
+    setIsDeleteModalOpen(false);
+    setItemToDelete(null);
   };
 
   const handleUpdateItem = async (id: string, updates: Partial<TextItem>) => {
@@ -295,7 +307,7 @@ const App: React.FC = () => {
             </div>
             <div className="flex flex-col">
                 <h1 className={`text-lg font-serif font-bold tracking-wide leading-none transition-colors duration-500 ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                    <span className="font-western text-xl">Deck</span> of Thoughts
+                    <span className="font-mono text-xl">Deck</span> of Thoughts
                 </h1>
                 <p className={`text-[10px] font-mono leading-none mt-1 transition-colors duration-500 ${isDark ? 'text-white/50' : 'text-slate-600'}`}>
                     {stats.total} Cards • Deck {activeDeckIndex + 1}/{totalDecks}
@@ -479,6 +491,7 @@ const App: React.FC = () => {
                     setIsModalOpen(true);
                 }}
                 onReorder={handleReorder}
+                onShuffle={handleShuffle}
             />
         </main>
       </div>
@@ -508,6 +521,18 @@ const App: React.FC = () => {
       </footer>
 
       {/* --- Modals --- */}
+      <ConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => {
+            setIsDeleteModalOpen(false);
+            setItemToDelete(null);
+        }}
+        onConfirm={confirmDelete}
+        title="Discard Card"
+        message="Are you sure you want to discard this card? This action cannot be undone."
+        confirmLabel="Discard"
+        cancelLabel="Keep"
+      />
       <CardModal 
         item={selectedItem}
         isOpen={isModalOpen}

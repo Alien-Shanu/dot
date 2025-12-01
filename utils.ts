@@ -3,10 +3,12 @@ export const generateId = (): string => {
 };
 
 export const formatDate = (timestamp: number): string => {
-  return new Date(timestamp).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-  });
+  if (!timestamp) return '';
+  const date = new Date(timestamp);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
 };
 
 export const shuffleArray = <T,>(array: T[]): T[] => {

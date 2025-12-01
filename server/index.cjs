@@ -84,7 +84,9 @@ app.get('/api/cards', authenticateToken, (req, res) => {
         // Parse tags JSON
         const cards = rows.map(card => ({
             ...card,
-            tags: JSON.parse(card.tags || '[]')
+            tags: JSON.parse(card.tags || '[]'),
+            createdAt: card.created_at,
+            updatedAt: card.updated_at
         }));
         res.json(cards);
     });
@@ -100,7 +102,7 @@ app.post('/api/cards', authenticateToken, (req, res) => {
         [id, req.user.id, title, category, content, JSON.stringify(tags || []), now, now],
         function(err) {
             if (err) return res.status(500).json({ error: err.message });
-            res.json({ id, user_id: req.user.id, title, category, content, tags: tags || [], created_at: now, updated_at: now });
+            res.json({ id, user_id: req.user.id, title, category, content, tags: tags || [], createdAt: now, updatedAt: now });
         }
     );
 });
@@ -121,7 +123,7 @@ app.put('/api/cards/:id', authenticateToken, (req, res) => {
             [title, category, content, JSON.stringify(tags || []), now, cardId],
             function(err) {
                 if (err) return res.status(500).json({ error: err.message });
-                res.json({ id: cardId, title, category, content, tags, updated_at: now });
+                res.json({ id: cardId, title, category, content, tags, updatedAt: now });
             }
         );
     });
