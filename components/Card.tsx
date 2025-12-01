@@ -32,11 +32,11 @@ const Card: React.FC<CardProps> = ({ item, onClick, onDelete, onEdit, style, cla
       <div className="absolute inset-2 border border-gray-200 rounded-xl pointer-events-none z-0" />
       
       {/* --- Top Left Corner --- */}
-      <div className="absolute top-4 left-4 flex flex-col items-center z-10 leading-none">
+      <div className="absolute top-[6px] left-4 flex flex-col items-center z-10 leading-none">
         <span className={`text-2xl font-serif font-bold ${config.colorClass}`}>
           {config.abbr}
         </span>
-        <CategoryIcon category={item.category} size={18} className="mt-1" />
+        <CategoryIcon category={item.category} size={18} className="mt-1 text-[#ce2424]" />
       </div>
 
       {/* --- Bottom Right Corner (Inverted) --- */}
@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({ item, onClick, onDelete, onEdit, style, cla
         <span className={`text-2xl font-serif font-bold ${config.colorClass}`}>
           {config.abbr}
         </span>
-        <CategoryIcon category={item.category} size={18} className="mt-1" />
+        <CategoryIcon category={item.category} size={18} className="mt-1 text-[#ce2424]" />
       </div>
 
       {/* --- Background Watermark --- */}
@@ -68,7 +68,7 @@ const Card: React.FC<CardProps> = ({ item, onClick, onDelete, onEdit, style, cla
       </div>
 
       {/* --- Footer Meta & Actions --- */}
-      <div className="absolute bottom-12 left-0 right-0 px-6 flex justify-between items-end z-20">
+      <div className="absolute bottom-[33px] left-0 right-0 px-6 flex justify-between items-end z-20">
         <div className="flex flex-col">
             <span className="text-[10px] text-gray-400 font-mono uppercase tracking-wider">
                 {formatDate(item.createdAt)}
