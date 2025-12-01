@@ -127,7 +127,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ onLoginSuccess }) => {
                             <button 
                                 type="submit"
                                 disabled={loading}
-                                className="w-full mt-6 bg-card-red text-white py-3 rounded-lg font-serif font-bold tracking-widest hover:bg-rose-700 transition-all flex items-center justify-center gap-2 group shadow-lg"
+                                className="w-full mt-6 bg-[#ce2424] text-white py-3 rounded-lg font-serif font-bold tracking-widest hover:bg-[#000080] transition-all flex items-center justify-center gap-2 group shadow-lg"
                             >
                                 {loading ? <Loader2 size={16} className="animate-spin" /> : (
                                     <>

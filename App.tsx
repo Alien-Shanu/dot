@@ -359,28 +359,28 @@ const App: React.FC = () => {
              <div className="flex gap-0.5 ml-0.5">
                  <button 
                     onClick={() => handleAddItem('story')} 
-                    className="p-2 bg-card-red text-white rounded-l-md hover:bg-rose-700 transition-all shadow-lg hover:shadow-red-900/30 flex items-center gap-1.5 border-r border-red-800"
+                    className="p-2 bg-[#ce2424] text-white rounded-l-md hover:bg-[#333460] hover:text-white transition-all shadow-lg flex items-center gap-1.5 border-r border-white/20"
                     title="Add Story"
                 >
                     <Plus size={14} /> <span className="font-bold text-[10px]">ST</span>
                  </button>
                  <button 
                     onClick={() => handleAddItem('prompt')} 
-                    className="p-2 bg-gray-800 text-white hover:bg-gray-900 transition-all shadow-lg flex items-center gap-1.5 border-r border-gray-700"
+                    className="p-2 bg-[#ce2424] text-white hover:bg-[#333460] hover:text-white transition-all shadow-lg flex items-center gap-1.5 border-r border-white/20"
                      title="Add Prompt"
                 >
                     <span className="font-bold text-[10px]">PR</span>
                  </button>
                   <button 
                     onClick={() => handleAddItem('note')} 
-                    className="p-2 bg-card-red text-white hover:bg-rose-700 transition-all shadow-lg flex items-center gap-1.5 border-r border-red-800"
+                    className="p-2 bg-[#ce2424] text-white hover:bg-[#333460] hover:text-white transition-all shadow-lg flex items-center gap-1.5 border-r border-white/20"
                      title="Add Note"
                 >
                     <span className="font-bold text-[10px]">NT</span>
                  </button>
                   <button 
                     onClick={() => handleAddItem('text')} 
-                    className="p-2 bg-gray-800 text-white rounded-r-md hover:bg-gray-900 transition-all shadow-lg flex items-center gap-1.5"
+                    className="p-2 bg-[#ce2424] text-white rounded-r-md hover:bg-[#333460] hover:text-white transition-all shadow-lg flex items-center gap-1.5"
                      title="Add File"
                 >
                     <span className="font-bold text-[10px]">TX</span>
@@ -416,7 +416,7 @@ const App: React.FC = () => {
              <button
                 onClick={handleLogout}
                 className={`
-                    p-1.5 rounded-lg transition-colors border text-card-red border-card-red/30 hover:bg-card-red hover:text-white
+                    p-1.5 rounded-lg transition-colors border border-white/10 text-white hover:bg-[#ce2424] hover:text-white hover:border-[#ce2424]
                 `}
                 title="Logout"
             >
