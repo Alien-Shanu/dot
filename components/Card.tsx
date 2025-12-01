@@ -14,7 +14,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ item, onClick, onDelete, onEdit, style, className = '' }) => {
-  const config = CATEGORY_CONFIG[item.category];
+  const config = CATEGORY_CONFIG[item.category] || CATEGORY_CONFIG.text; // Fallback to 'text' if category is unknown
 
   return (
     <div

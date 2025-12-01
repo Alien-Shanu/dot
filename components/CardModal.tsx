@@ -31,7 +31,7 @@ const CardModal: React.FC<CardModalProps> = ({ item, isOpen, onClose, onSave, is
 
   if (!isOpen || !item) return null;
 
-  const config = CATEGORY_CONFIG[item.category];
+  const config = CATEGORY_CONFIG[item.category] || CATEGORY_CONFIG.text;
 
   const handleSave = () => {
     onSave(item.id, {

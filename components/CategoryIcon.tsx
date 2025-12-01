@@ -40,7 +40,7 @@ export const CATEGORY_CONFIG: Record<CardCategory, CardStyleConfig> = {
 };
 
 const CategoryIcon: React.FC<CategoryIconProps> = ({ category, className = "", size = 24 }) => {
-  const config = CATEGORY_CONFIG[category];
+  const config = CATEGORY_CONFIG[category] || CATEGORY_CONFIG.text;
   const IconComponent = config.icon;
 
   return <IconComponent size={size} className={`${config.colorClass} ${className}`} fill="currentColor" />;
